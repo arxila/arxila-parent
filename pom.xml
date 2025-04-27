@@ -3,7 +3,7 @@
 <!--
   ~ =============================================================================
   ~
-  ~   Copyright (c) 2019-2025 Aquen (https://aquen.io)
+  ~   Copyright (c) 2019-2025 Aquen OSS (https://aquen.io)
   ~
   ~   Licensed under the Apache License, Version 2.0 (the "License");
   ~   you may not use this file except in compliance with the License.
@@ -31,12 +31,12 @@
   <artifactId>aquen-parent</artifactId>
   <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
-  <name>aquen parent POM</name>
-  <description>Parent POM for Aquen Java OSS projects</description>
+  <name>Aquen OSS parent POM</name>
+  <description>Parent POM for Aquen OSS Java projects</description>
   <url>https://aquen.io</url>
 
   <organization>
-    <name>Aquen</name>
+    <name>Aquen OSS</name>
     <url>https://aquen.io</url>
   </organization>
 
@@ -50,8 +50,8 @@
 
   <developers>
     <developer>
-      <name>Aquen</name>
-      <organization>Aquen</organization>
+      <name>Aquen OSS</name>
+      <organization>Aquen OSS</organization>
       <organizationUrl>https://aquen.io</organizationUrl>
     </developer>
   </developers>
@@ -104,7 +104,7 @@
     <!-- ======================     -->
     <!-- MODULE configuration       -->
     <!-- ======================     -->
-    <module.name>${project.artifactId}</module.name>
+    <module.name>aquen.${project.artifactId}</module.name>
     <!-- =========================  -->
     <!-- Configure JavaDoc plugin   -->
     <!-- (Avoids JPMS issues.)      -->
