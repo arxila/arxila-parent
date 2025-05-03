@@ -1,4 +1,4 @@
-# Releasing aquen-parent
+# Releasing arxila-parent
 
 ## 1. Configuration
 
@@ -21,7 +21,7 @@ Configure access to the snapshots and staging servers in `settings.xml`:
 
 ## 2. Check dependency snapshots
 
-If this is an GA or RC version of aquen-parent being published, check that no
+If this is an GA or RC version of arxila-parent being published, check that no
 dependencies are in SNAPSHOT version.
 
 If any SNAPSHOTs exist, set to a fixed version and commit.
@@ -32,7 +32,7 @@ If any SNAPSHOTs exist, set to a fixed version and commit.
 mvn versions:set -DprocessAllModules=true -DnewVersion=X.Y.Z
 mvn versions:commit
 git add .
-git commit -m "Prepare release aquen-parent-X.Y.Z"
+git commit -m "Prepare release arxila-parent-X.Y.Z"
 git push
 ```
 
@@ -45,7 +45,7 @@ mvn -P releases clean compile deploy
 ## 5. Create tag and set to new development version
 
 ```shell
-mvn scm:tag -Dtag=aquen-parent-X.Y.Z
+mvn scm:tag -Dtag=arxila-parent-X.Y.Z
 mvn versions:set -DprocessAllModules=true -DnewVersion=X.Y.[Z+1]-SNAPSHOT
 mvn versions:commit
 git add .;

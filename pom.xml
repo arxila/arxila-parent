@@ -3,7 +3,7 @@
 <!--
   ~ =============================================================================
   ~
-  ~   Copyright (c) 2019-2025 Aquen (https://aquen.io)
+  ~   Copyright (c) 2019-2025 Arxila OSS (https://arxila.io)
   ~
   ~   Licensed under the Apache License, Version 2.0 (the "License");
   ~   you may not use this file except in compliance with the License.
@@ -27,17 +27,17 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.aquen</groupId>
-  <artifactId>aquen-parent</artifactId>
+  <groupId>io.arxila</groupId>
+  <artifactId>arxila-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.1-SNAPSHOT</version>
-  <name>Aquen Java OSS parent POM</name>
-  <description>Parent POM for Aquen Java OSS projects</description>
-  <url>https://aquen.io</url>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>Arxila OSS Java parent POM</name>
+  <description>Parent POM for Arxila Open Source Java projects</description>
+  <url>https://arxila.io</url>
 
   <organization>
-    <name>Aquen :: Open Source Software</name>
-    <url>https://aquen.io</url>
+    <name>Arxila OSS</name>
+    <url>https://arxila.io</url>
   </organization>
 
   <licenses>
@@ -50,16 +50,16 @@
 
   <developers>
     <developer>
-      <name>Aquen</name>
-      <organization>Aquen :: Open Source Software</organization>
-      <organizationUrl>https://aquen.io</organizationUrl>
+      <name>Arxila</name>
+      <organization>Arxila OSS</organization>
+      <organizationUrl>https://arxila.io</organizationUrl>
     </developer>
   </developers>
 
   <scm child.scm.url.inherit.append.path="false"
        child.scm.developerConnection.inherit.append.path="false">
-    <url>https://github.com/aquendev/${project.artifactId}</url>
-    <developerConnection>scm:git:git@github.com:aquendev/${project.artifactId}</developerConnection>
+    <url>https://github.com/arxila/${project.artifactId}</url>
+    <developerConnection>scm:git:git@github.com:arxila/${project.artifactId}</developerConnection>
   </scm>
 
   <distributionManagement>
@@ -104,13 +104,13 @@
     <!-- ======================     -->
     <!-- MODULE configuration       -->
     <!-- ======================     -->
-    <module.name>aquen.${project.artifactId}</module.name>
+    <module.name>arxila.${project.artifactId}</module.name>
     <!-- =========================  -->
     <!-- Configure JavaDoc plugin   -->
     <!-- (Avoids JPMS issues.)      -->
     <!-- =========================  -->
-    <maven.javadoc.source>8</maven.javadoc.source>
-    <maven.javadoc.release>8</maven.javadoc.release>
+    <maven.javadoc.source>11</maven.javadoc.source>
+    <maven.javadoc.release>11</maven.javadoc.release>
     <!-- ======================     -->
     <!-- DEPENDENCY versions        -->
     <!-- ======================     -->
@@ -242,7 +242,7 @@
                 <X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
                 <X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
                 <!-- Set the Built-By attribute to avoid displaying specific usernames.         -->
-                <Built-By>aquen</Built-By>
+                <Built-By>arxila</Built-By>
                 <!-- Setting this automatic module name will fix the module name being used     -->
                 <!-- even if the project is not yet fully modularised.                          -->
                 <Automatic-Module-Name>${module.name}</Automatic-Module-Name>
@@ -303,7 +303,7 @@
                 <goal>sign</goal>
               </goals>
               <configuration>
-                <keyname>releases@aquen.io</keyname>
+                <keyname>releases@arxila.io</keyname>
               </configuration>
             </execution>
           </executions>
