@@ -30,7 +30,7 @@
   <groupId>io.arxila</groupId>
   <artifactId>arxila-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <name>Arxila OSS Java parent POM</name>
   <description>Parent POM for Arxila Open Source Java projects</description>
   <url>https://arxila.io</url>
