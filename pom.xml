@@ -86,6 +86,7 @@
 
   <properties>
     <java.version>17</java.version>
+    <javadoc.version>${java.version}</javadoc.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.release>${java.version}</maven.compiler.release>
@@ -107,10 +108,9 @@
     <module.name>arxila.${project.artifactId}</module.name>
     <!-- =========================  -->
     <!-- Configure JavaDoc plugin   -->
-    <!-- (Avoids JPMS issues.)      -->
     <!-- =========================  -->
-    <maven.javadoc.source>11</maven.javadoc.source>
-    <maven.javadoc.release>11</maven.javadoc.release>
+    <maven.javadoc.source>${javadoc.version}</maven.javadoc.source>
+    <maven.javadoc.release>${javadoc.version}</maven.javadoc.release>
     <!-- ======================     -->
     <!-- DEPENDENCY versions        -->
     <!-- ======================     -->
