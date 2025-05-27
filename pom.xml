@@ -30,7 +30,7 @@
   <groupId>io.arxila</groupId>
   <artifactId>arxila-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2</version>
   <name>Arxila OSS Java parent POM</name>
   <description>Parent POM for Arxila Open Source Java projects</description>
   <url>https://arxila.io</url>
@@ -100,8 +100,8 @@
     <!-- ======================     -->
     <!-- OPERATIONAL flags          -->
     <!-- ======================     -->
-    <!-- Deploy will only execute during release by enabling the 'releases' profile.  -->
-    <maven.deploy.skip>true</maven.deploy.skip>
+    <!-- Only the 'releases' profile will enable deployment of artifacts.   -->
+    <artifact.deploy.disabled>true</artifact.deploy.disabled>
     <!-- ======================     -->
     <!-- MODULE configuration       -->
     <!-- ======================     -->
@@ -295,6 +295,9 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
           <version>${maven-gpg-plugin.version}</version>
+          <configuration>
+            <skip>${artifact.deploy.disabled}</skip>
+          </configuration>
           <executions>
             <execution>
               <id>gpg-sign</id>
@@ -309,12 +312,15 @@
           </executions>
         </plugin>
 
-        <!-- NOTE releases will be performed by means of maven-deploy-plugin. This means that   -->
-        <!-- the maven-releases-plugin will not be needed as a part of the release cycle.       -->
+        <!-- IMPORTANT: maven-deploy-plugin is skipped. Deployment will always  -->
+        <!-- be handled by central-publishing-maven-plugin.                     -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>${maven-deploy-plugin.version}</version>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
         </plugin>
 
         <plugin>
@@ -380,6 +386,24 @@
           <version>${maven-versions-plugin.version}</version>
         </plugin>
 
+        <!-- IMPORTANT: central-publishing-maven-plugin works like this:        -->
+        <!--   * If there are no explicit executions configured for it, it will -->
+        <!--     add an execution of its "publish" goal to the "deploy" phase,  -->
+        <!--     and also search for the presence of maven-deploy-plugin and    -->
+        <!--     nexus-staging-maven-plugin and REMOVE their executions, so     -->
+        <!--     that only central-publishing-maven-plugin executes during      -->
+        <!--     the "deploy" phase.                                            -->
+        <plugin>
+          <groupId>org.sonatype.central</groupId>
+          <artifactId>central-publishing-maven-plugin</artifactId>
+          <version>${maven-central-publishing-plugin.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <publishingServerId>central</publishingServerId>
+            <skipPublishing>${artifact.deploy.disabled}</skipPublishing>
+          </configuration>
+        </plugin>
+
       </plugins>
     </pluginManagement>
 
@@ -389,12 +413,10 @@
     <profile>
       <id>releases</id>
       <properties>
-        <maven.deploy.skip>false</maven.deploy.skip>
+        <artifact.deploy.disabled>false</artifact.deploy.disabled>
       </properties>
       <build>
         <plugins>
-          <!-- NOTE maven-gpg-plugin needs to be set for execution at this point because the pom    -->
-          <!-- artifacts generated for pom-type parents also need to be signed for deployment.      -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
@@ -402,11 +424,6 @@
           <plugin>
             <groupId>org.sonatype.central</groupId>
             <artifactId>central-publishing-maven-plugin</artifactId>
-            <version>${maven-central-publishing-plugin.version}</version>
-            <extensions>true</extensions>
-            <configuration>
-              <publishingServerId>central</publishingServerId>
-            </configuration>
           </plugin>
         </plugins>
       </build>
