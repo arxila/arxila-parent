@@ -3,7 +3,7 @@
 <!--
   ~ =============================================================================
   ~
-  ~   Copyright (c) 2019-2025 Arxila OSS (https://arxila.io)
+  ~   Copyright (c) 2019-2026 Arxila OSS (https://arxila.io)
   ~
   ~   Licensed under the Apache License, Version 2.0 (the "License");
   ~   you may not use this file except in compliance with the License.
@@ -136,6 +136,7 @@
     <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
     <maven-versions-plugin.version>2.21.0</maven-versions-plugin.version>
     <maven-central-publishing-plugin.version>0.10.0</maven-central-publishing-plugin.version>
+    <maven-build-helper-plugin.version>3.6.1</maven-build-helper-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -171,6 +172,44 @@
   </dependencyManagement>
 
   <build>
+
+    <!-- The contents of the <resources> tag in children will overwrite the contents of the parent so  -->
+    <!-- any project that wishes to extend this configuration will need to either copy these or use    -->
+    <!-- the org.codehaus.mojo:build-helper-maven-plugin to append resources.                          -->
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+        <excludes>
+          <exclude>io/arxila/${project.artifactId}/${project.artifactId}.properties</exclude>
+        </excludes>
+      </resource>
+
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+        <includes>
+          <include>io/arxila/${project.artifactId}/${project.artifactId}.properties</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+
+      <resource>
+        <directory>${project.basedir}</directory>
+        <targetPath>META-INF</targetPath>
+        <includes>
+          <include>LICENSE.txt</include>
+          <include>NOTICE.txt</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <!-- The contents of the <testResources> tag in children will overwrite the contents of the parent -->
+    <!-- so any project that wishes to extend this configuration will need to either copy these or use -->
+    <!-- the org.codehaus.mojo:build-helper-maven-plugin to append resources.                          -->
+    <testResources>
+      <testResource>
+        <directory>${project.basedir}/src/test/resources</directory>
+      </testResource>
+    </testResources>
 
     <pluginManagement>
       <plugins>
@@ -415,6 +454,12 @@
             <publishingServerId>central</publishingServerId>
             <skipPublishing>${artifact.deploy.disabled}</skipPublishing>
           </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>${maven-build-helper-plugin.version}</version>
         </plugin>
 
       </plugins>
